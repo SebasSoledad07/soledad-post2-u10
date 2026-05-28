@@ -12,10 +12,12 @@ public class Tarea {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank
+    @Column(nullable = false)
     private String titulo;
     private String descripcion;
     private boolean completada = false;
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime fechaCreacion;
 
     public Tarea() {}
@@ -28,5 +30,4 @@ public class Tarea {
     public boolean isCompletada() { return completada; }
     public void setCompletada(boolean completada) { this.completada = completada; }
     public LocalDateTime getFechaCreacion() { return fechaCreacion; }
-    public void setFechaCreacion(LocalDateTime fechaCreacion) { this.fechaCreacion = fechaCreacion; }
-}
+   }
