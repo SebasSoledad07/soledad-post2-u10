@@ -99,34 +99,13 @@ Select-String -Path .\target\site\jacoco\index.html -Pattern "Total" -Context 0,
 - `src/test/java/com/universidad/pruebas/PruebasApplicationTests.java`
   - Test de contexto de Spring Boot (`contextLoads`).
 
-## Cómo aumentar la cobertura a >= 70%
-
-Actualmente la cobertura total es del 95%. Si en el futuro baja, estas son las acciones para mantenerla por encima de 70%:
-
-1. Aumentar cobertura de `com.universidad.pruebas.model` (ahora 100%):
-   - Mantener tests que cubran getters/setters y posibles cambios futuros en la entidad.
-   - Añadir pruebas que ejerciten la serialización JSON de `Tarea` (si se usa en controladores).
-
-2. Aumentar cobertura de `service` (está en 100%):
-   - Mantener tests para casos de borde en `crear` (título nulo, espacios, longitud, etc.).
-   - Añadir tests que verifiquen comportamiento de `completar` cuando `buscarPorId` lanza excepción.
-
-3. Añadir tests para controladores adicionales o casos de error (p. ej. validaciones de entrada, respuestas 400).
-
-4. Si hay código sin lógica (POJOs) que no quieres testear, considera excluir paquetes del informe JaCoCo (no recomendado salvo casos justificables) o enfocarte en cubrir código con lógica.
-
-5. Ejecutar cobertura y revisar `target/site/jacoco/index.html` para identificar líneas/clases no cubiertas y escribir tests dirigidos.
-
 Comando sugerido para una iteración rápida de cobertura después de añadir tests:
 
 ```powershell
 mvn -Dtest=TareaServiceTest,TareaRepositoryTest,TareaControllerTest,TareaModelTest test jacoco:report
 ```
 
-## Opcionales / notas
-
-- Advertencia de Mockito (inline-mock-maker): si ves la advertencia "Mockito is currently self-attaching..." puedes añadir la dependencia `mockito-inline` para evitar auto-adjuntado. Ejemplo de dependencia para `pom.xml`:
-
+## Dependencia de Mockito Inline
 ```xml
 <dependency>
   <groupId>org.mockito</groupId>
@@ -136,14 +115,13 @@ mvn -Dtest=TareaServiceTest,TareaRepositoryTest,TareaControllerTest,TareaModelTe
 </dependency>
 ```
 
-- JaCoCo ya se actualizó a 0.8.13 en el `pom.xml` para resolver errores de instrumentación con JDK recientes.
+## Captura de pantalla del informe JaCoCo actual
+![Captura del informe JaCoCo](docs/screenshots/reporte-joacoco.png)
 
----
+## Test pasados exitosamente:
 
-Si quieres, puedo:
+![Tarea Test](docs/screenshots/tarea-test.png)
+![Tarea Service](docs/screenshots/tarea-service-test.png)
+![Tarea Controller](docs/screenshots/tarea-controller-test.png)
 
-- Incluir en este README una captura (imagen) real del HTML (tendrás que subirla) o generar un pequeño snippet HTML con el resumen insertado.
-- Intentar llevar la cobertura automáticamente a >= 70% añadiendo tests adicionales y ejecutándolos — dime si deseas que lo haga.
-
-Fin.
 
