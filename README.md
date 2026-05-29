@@ -73,8 +73,6 @@ Luego toma una captura de la ventana de la consola o del archivo `e2e-result.txt
 - GitHub Actions — workflow passing (ejemplo incluido):
   ![Workflow passing](docs/screenshots/post2/workflow-passing.png)
 
-Si quieres, puedo generar un pequeño script PowerShell que automatice la ejecución de E2E + Newman y coloque las evidencias en `docs/screenshots/` (requiere instalar `scrot`/herramienta de captura o usar una captura manual en Windows). ¿Quieres que te prepare ese script?
-
 
 
 
